@@ -1,6 +1,6 @@
-# TaskFlow - ToDo List Application
+#ToDo List Application
 
-TaskFlow is a simple and clean Spring Boot web application designed to manage daily tasks. It provides complete CRUD operations (Create, Read, Update, Delete) and manages task states like Priority, Status, and Due Dates.
+ToDo List App is a simple and clean Spring Boot web application designed to manage daily tasks. It provides complete CRUD operations (Create, Read, Update, Delete) and manages task states like Priority, Status, and Due Dates.
 
 ## Tech Stack
 - **Backend:** Java (25+), Spring Boot (4.1.0), Spring Data JPA, Hibernate
