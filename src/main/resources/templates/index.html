@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo List App</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header Section -->
+      <div class="header">
+        <h2>ToDo List App</h2>
+        <a th:href="@{/todos}" class="btn">Add New Task</a>
+      </div>
+
+      <!-- Success & Error Messages -->
+      <div th:if="${success_msg}" class="alert alert-success">
+        <span th:text="${success_msg}"></span>
+      </div>
+
+      <div th:if="${error_msg}" class="alert alert-error">
+        <span th:text="${error_msg}"></span>
+      </div>
+
+      <!-- Main Todo List Table -->
+      <div th:if="${not #lists.isEmpty(todo_list)}">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Due Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="todo : ${todo_list}">
+              <td th:text="${todo.title}" style="font-weight: 600;">Title</td>
+              <td th:text="${todo.description}">Description</td>
+              <td>
+                <span th:class="'badge badge-' + ${#strings.toLowerCase(todo.status)}" th:text="${todo.status}">Status</span>
+              </td>
+              <td>
+                <span th:class="'badge badge-' + ${#strings.toLowerCase(todo.priority)}" th:text="${todo.priority}">Priority</span>
+              </td>
+              <td>
+                <span th:text="${todo.dueDate}" th:classappend="${todo.dueDate != null and todo.dueDate.isBefore(T(java.time.LocalDate).now())} ? 'overdue'">2026-08-05</span>
+                <span th:if="${todo.dueDate != null and todo.dueDate.isBefore(T(java.time.LocalDate).now())}" class="overdue"> (Overdue)</span>
+              </td>
+              <td>
+                <a th:href="@{/todos/update/{id}(id=${todo.id})}" class="action-link">Edit</a>
+                <a th:href="@{/todos/delete/{id}(id=${todo.id})}" class="action-link delete" onclick="return confirm('Are you sure you want to delete this task?')">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty State -->
+      <div th:if="${#lists.isEmpty(todo_list)}" style="text-align: center; padding: 40px; color: #7f8c8d;">
+        <p>No tasks found. Click "Add New Task" to get started!</p>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>AI assistance was used to help build this frontend interface.</p>
+      </footer>
+    </div>
+  </body>
+</html>
