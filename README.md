@@ -1,18 +1,23 @@
-#ToDo List Application
+# ToDo List Application
 
-ToDo List App is a simple and clean Spring Boot web application designed to manage daily tasks. It provides complete CRUD operations (Create, Read, Update, Delete) and manages task states like Priority, Status, and Due Dates.
+ToDo List App is a secure and responsive Spring Boot web application designed to manage daily tasks. It provides complete CRUD operations (Create, Read, Update, Delete), user authentication, method-level authorization, and task state management (Priority, Status, and Due Dates).
 
 ## Tech Stack
-- **Backend:** Java (25+), Spring Boot (4.1.0), Spring Data JPA, Hibernate
+- **Backend:** Java (25+), Spring Boot (4.1.1), Spring Security, Spring Data JPA, Hibernate
+- **Security:** Spring Security (Form-based Authentication, Method-based Authorization via `@EnableMethodSecurity`, BCrypt Password Hashing, CSRF Protection)
 - **Database:** MySQL
-- **Frontend:** HTML5, Thymeleaf, Custom Vanilla CSS
+- **Frontend:** HTML5, Thymeleaf, Custom Responsive CSS (with Light & Dark Mode support)
 
 ## Features
-- **Task Management:** Create, view, edit, and delete todo tasks.
-- **Detailed Attributes:** Add descriptions, specify due dates, categorize status (`PENDING`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`), and prioritize (`LOW`, `MEDIUM`, `HIGH`).
-- **Overdue Indicator:** Highlights tasks whose due dates have already passed.
-- **Clean Table Layout:** A clean, standard user interface with badges for clear visibility.
-- **AI Help Notice:** Frontend CSS design and Thymeleaf integration refined with the assistance of AI.
+- **User Authentication:** Secure registration and login system with encrypted password storage using `BCryptPasswordEncoder`.
+- **Method-Based Authorization & User Isolation:** Role-based access control with `@EnableMethodSecurity` and user-scoped data access ensuring users only manage their own tasks.
+- **Task Management (CRUD):** Create, view, update, and delete personal todo tasks.
+- **Task Categorization & Tracking:**
+  - **Status:** `PENDING`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`
+  - **Priority:** `LOW`, `MEDIUM`, `HIGH`
+  - **Due Dates & Overdue Indicator:** Automated tracking and highlighting of overdue tasks.
+- **Consistent UI Design:** Clean, centered card layout with solid button-style status and priority badges.
+- **CSRF & Input Validation:** Built-in form validation and CSRF-protected operations.
 
 ## Local Setup & Installation
 
@@ -42,4 +47,5 @@ Run the project using Maven Wrapper:
 # On Windows
 mvnw.cmd spring-boot:run
 ```
-Once started, the application will be accessible at: [http://localhost:8080](http://localhost:8080)
+Once started, the application will be accessible at: [http://localhost:8081](http://localhost:8081)
+
