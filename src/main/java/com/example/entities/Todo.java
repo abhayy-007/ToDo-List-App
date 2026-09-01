@@ -10,8 +10,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table
@@ -22,9 +27,12 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "Title is required")
+    @Size(max = 255, message = "Title cannot exceed 255 characters")
     @Column(nullable = false)
     private String title;
 
+    @Size(max = 1000, message = "Description cannot exceed 1000 characters")
     @Column(length = 1000)
     private String description;
 
@@ -35,18 +43,31 @@ public class Todo {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @NotNull(message = "Due date is required")
     @Column(nullable = false)
     private LocalDate dueDate;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TodoPriority priority;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @PrePersist
-    public void PrePersist(){
+    public void PrePersist() {
         this.createdAt = LocalDateTime.now();
 
-        if(this.status == null){
+        if (this.status == null) {
             this.status = TodoStatus.PENDING;
         }
 
@@ -111,5 +132,4 @@ public class Todo {
         this.priority = priority;
     }
 
-    
 }

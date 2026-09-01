@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - ToDo List App</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container auth-container">
+      <div class="header auth-header">
+        <h2>Create Account</h2>
+        <p class="subtitle">Register for your ToDoList account</p>
+      </div>
+
+      <!-- Error message -->
+      <div th:if="${error}" class="alert alert-error">
+        <span th:text="${error}">Registration failed</span>
+      </div>
+
+      <!-- Success message -->
+      <div th:if="${success}" class="alert alert-success">
+        <span th:text="${success}">Registration successful</span>
+      </div>
+
+      <form th:action="@{/register}" method="post">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control"
+            placeholder="Enter username"
+            required
+            autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Enter password (min 6 characters)"
+            minlength="6"
+            required
+          />
+        </div>
+
+        <div class="form-actions" style="margin-top: 25px;">
+          <button type="submit" class="btn btn-block">Register</button>
+        </div>
+      </form>
+
+      <div class="auth-footer-link">
+        <span>Already have an account?</span>
+        <a th:href="@{/login}">Login</a>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>AI assistance was used to help build this frontend interface.</p>
+      </footer>
+    </div>
+  </body>
+</html>
